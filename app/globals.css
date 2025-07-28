@@ -67,6 +67,39 @@
     @apply bg-background text-foreground;
   }
 }
+@font-face {
+  font-family: "SolaimanLipil";
+  src: url("/fonts/SolaimanLipi5e1f.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SolaimanLipiz";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.cdnfonts.com/s/14639/solaimanlipi.woff")
+    format("woff");
+}
+@font-face {
+  font-family: "SutonnyMJ";
+  src: url("/fonts/SutonnyMJ-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Noto Serif Bengali";
+  src: url("/fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.font-sutonny {
+  font-family: "SutonnyMJ", sans-serif;
+}
+.font-noto {
+  font-family: "Noto Serif Bengali", serif;
+}
+
 
 .font-playfair {
   font-family: var(--font-playfair);

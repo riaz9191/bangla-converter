@@ -22,6 +22,8 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)"],
         playfair: ["var(--font-playfair)"],
+        sutonny: ["SutonnyMJ", "sans-serif"],
+        noto: ["Noto Serif Bengali", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -104,6 +106,6 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
 export default config
