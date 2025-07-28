@@ -15,7 +15,6 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 export const metadata: Metadata = {
   title: "Bangla Text Converter",
   description: "A simple tool to convert Bangla text.",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({

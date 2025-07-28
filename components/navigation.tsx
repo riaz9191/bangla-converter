@@ -10,7 +10,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", href: "/" },
+    { name: "হোম", href: "/" },
     { name: "কনভার্ট করুন", href: "/convert" },
   ];
 
@@ -24,7 +24,7 @@ export function Navigation() {
               <span className='text-white font-bold text-sm'>BC</span>
             </div>
             <span className='text-xl font-light text-gray-900 font-playfair'>
-              Bangla Converter
+              বাংলা কনভার্টার
             </span>
           </Link>
 
