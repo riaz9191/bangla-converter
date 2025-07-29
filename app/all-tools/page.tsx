@@ -1,6 +1,7 @@
 "use client";
 import { ArrowRight, ScanText, ImageIcon, FileText, Code, QrCode, FileType, Palette, Lock, Pilcrow, Link2, Type, Clock, Ruler, Key, Search } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import React, { useState, useEffect, useRef } from 'react';
 
 const tools = [
   { name: 'Bangla OCR', description: 'Extract text from images', href: '/tools/bangla-ocr', icon: <ScanText className='w-8 h-8 mb-4 text-blue-500' />, category: 'Text Tools' },
@@ -95,63 +96,71 @@ export default function AllToolsPage() {
     };
   }, []);
 
+  const NAVBAR_HEIGHT = 64; // Assuming your navbar height is 64px (h-16)
+
   const scrollToCategory = (categoryName: string) => {
     const ref = categoryRefs.current[categoryName];
     if (ref) {
-      ref.scrollIntoView({ behavior: 'smooth' });
+      const yOffset = -NAVBAR_HEIGHT; // Adjust for fixed navbar
+      const y = ref.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white p-8 flex'>
-      {/* Sidebar */}
-      <div className='w-1/5 p-4 sticky top-0 h-screen overflow-y-auto'>
-        <h2 className='text-2xl font-bold text-gray-800 mb-4'>Categories</h2>
-        <ul>
-          {categories.map((category) => (
-            <li key={category.name} className='mb-2'>
-              <button
-                onClick={() => scrollToCategory(category.name)}
-                className={`text-lg ${activeCategory === category.name ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-500'}`}
-              >
-                {category.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Main Content */}
-      <div className='w-4/5 p-4'>
-        <div className='text-center mb-12'>
-          <h1 className='text-5xl font-bold text-gray-800'>All Tools</h1>
-          <p className='text-lg text-gray-600 mt-2'>A collection of useful tools to make your life easier.</p>
-          <p className='text-xl font-semibold text-gray-700 mt-4'>Total Tools: {tools.length}</p>
-        </div>
-        {
-          categories.map((category) => (
-            <div key={category.name} id={category.name} ref={(el) => (categoryRefs.current[category.name] = el)} className="mb-12">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">{category.name}</h2>
-              <p className="text-lg text-gray-600 mb-8">{category.description}</p>
-              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
-                {tools
-                  .filter((tool) => tool.category === category.name)
-                  .map((tool) => (
-                    <div key={tool.name} className='bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow transform hover:-translate-y-2 duration-300 flex flex-col justify-between'>
-                      <div>
-                        {tool.icon}
-                        <h3 className='text-2xl font-semibold text-gray-800 mb-2'>{tool.name}</h3>
-                        <p className='text-gray-600 mb-4'>{tool.description}</p>
-                      </div>
-                      <a href={tool.href} className='text-blue-600 hover:text-blue-800 flex items-center font-semibold group'>
-                        Use Tool <ArrowRight className='w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform' />
-                      </a>
-                    </div>
-                  ))}
+    <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white p-8'>
+      <div className='container mx-auto px-4 flex'>
+        {/* Main Content */}
+        <div className='flex-1 p-4 pt-16'> {/* Added pt-16 to push content below navbar */}
+          <div className='text-center mb-12'>
+            <h1 className='text-5xl font-bold text-gray-800'>All Tools</h1>
+            <p className='text-lg text-gray-600 mt-2'>A collection of useful tools to make your life easier.</p>
+            <p className='text-xl font-semibold text-gray-700 mt-4'>Total Tools: {tools.length}</p>
+          </div>
+          {
+            categories.map((category) => (
+              <div key={category.name} id={category.name} ref={(el) => (categoryRefs.current[category.name] = el)} className="mb-12">
+                <h2 className="text-4xl font-bold text-gray-800 mb-4">{category.name}</h2>
+                <p className="text-lg text-gray-600 mb-8">{category.description}</p>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
+                  {tools
+                    .filter((tool) => tool.category === category.name)
+                    .map((tool) => (
+                      <Link href={tool.href} key={tool.name} className='relative bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow transform hover:-translate-y-2 duration-300 flex flex-col justify-between cursor-pointer overflow-hidden'>
+                        <div className='absolute top-4 right-4 opacity-10 rotate-12 z-0'>
+                          {React.cloneElement(tool.icon, { className: 'w-24 h-24' })}
+                        </div>
+                        <div className='relative z-10'>
+                          <div className='w-8 h-8 mb-4'>{tool.icon}</div> {/* Original icon for display */}
+                          <h3 className='text-2xl font-semibold text-gray-800 mb-2'>{tool.name}</h3>
+                          <p className='text-gray-600 mb-4'>{tool.description}</p>
+                        </div>
+                        <div className='relative z-10 text-blue-600 hover:text-blue-800 flex items-center font-semibold group'>
+                          Use Tool <ArrowRight className='w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform' />
+                        </div>
+                      </Link>
+                    ))}
+                </div>
               </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
+        {/* Sidebar */}
+        <div className='w-64 p-4 sticky mt-16 top-0 h-screen overflow-y-auto bg-white rounded-xl shadow-lg ml-8'>
+          <h2 className='text-2xl font-bold text-gray-800 mb-4'>Categories</h2>
+          <ul>
+            {categories.map((category) => (
+              <li key={category.name} className='mb-2'>
+                <button
+                  onClick={() => scrollToCategory(category.name)}
+                  className={`text-lg ${activeCategory === category.name ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-500'}`}
+                >
+                  {category.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
