@@ -27,11 +27,11 @@ export default function PdfConverterPage() {
           const img = new Image();
           img.src = imgData;
           img.onload = () => {
-            const imgWidth = img.width;
-            const imgHeight = img.height;
+            const imgWidth = img.naturalWidth;
+            const imgHeight = img.naturalHeight;
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (imgHeight * pdfWidth) / imgWidth;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.addImage(imgData, selectedFile.type.split('/')[1].toUpperCase(), 0, 0, pdfWidth, pdfHeight);
             const pdfBlob = pdf.output('blob');
             const url = URL.createObjectURL(pdfBlob);
             setPdfUrl(url);

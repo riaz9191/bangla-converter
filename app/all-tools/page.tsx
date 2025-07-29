@@ -1,4 +1,5 @@
-import { ArrowRight, ScanText, ImageIcon, FileText, Code, QrCode, FileType, Palette, Lock, Pilcrow, Link2 } from 'lucide-react';
+import { ArrowRight, ScanText, ImageIcon, FileText, Code, QrCode, FileType, Palette, Lock, Pilcrow, Link2, Type, Clock, Ruler, Key } from 'lucide-react';
+
 
 const tools = [
   { name: 'Bangla OCR', description: 'Extract text from images', href: '/tools/bangla-ocr', icon: <ScanText className='w-8 h-8 mb-4 text-blue-500' /> },
@@ -11,6 +12,16 @@ const tools = [
   { name: 'Password Generator', description: 'Create strong passwords', href: '/tools/password-generator', icon: <Lock className='w-8 h-8 mb-4 text-gray-500' /> },
   { name: 'Markdown Editor', description: 'Write and preview Markdown', href: '/tools/markdown-editor', icon: <Pilcrow className='w-8 h-8 mb-4 text-orange-500' /> },
   { name: 'URL Shortener', description: 'Shorten long URLs', href: '/tools/url-shortener', icon: <Link2 className='w-8 h-8 mb-4 text-teal-500' /> },
+  { name: 'Text Case Converter', description: 'Convert text to different cases', href: '/tools/text-case-converter', icon: <Pilcrow className='w-8 h-8 mb-4 text-blue-500' /> },
+  { name: 'Base64 Encoder/Decoder', description: 'Encode and decode Base64 strings', href: '/tools/base64-converter', icon: <Code className='w-8 h-8 mb-4 text-purple-500' /> },
+  { name: 'Unit Converter', description: 'Convert between different units of measurement', href: '/tools/unit-converter', icon: <Ruler className='w-8 h-8 mb-4 text-green-500' /> },
+  { name: 'Timestamp Converter', description: 'Convert between timestamps and human-readable dates', href: '/tools/timestamp-converter', icon: <Clock className='w-8 h-8 mb-4 text-orange-500' /> },
+  { name: 'Color Format Converter', description: 'Convert colors between different formats (HEX, RGB, HSL)', href: '/tools/color-format-converter', icon: <Palette className='w-8 h-8 mb-4 text-pink-500' /> },
+  { name: 'CSV to JSON Converter', description: 'Convert CSV data to JSON format', href: '/tools/csv-to-json-converter', icon: <FileText className='w-8 h-8 mb-4 text-green-500' /> },
+  { name: 'JSON to YAML Converter', description: 'Convert JSON data to YAML format', href: '/tools/json-to-yaml-converter', icon: <FileText className='w-8 h-8 mb-4 text-red-500' /> },
+  { name: 'Image to Base64 Converter', description: 'Convert images to Base64 strings', href: '/tools/image-to-base64-converter', icon: <ImageIcon className='w-8 h-8 mb-4 text-yellow-500' /> },
+  { name: 'Word Counter', description: 'Count words, characters, and lines in your text', href: '/tools/word-counter', icon: <Type className='w-8 h-8 mb-4 text-indigo-500' /> },
+  { name: 'UUID Generator', description: 'Generate universally unique identifiers', href: '/tools/uuid-generator', icon: <Key className='w-8 h-8 mb-4 text-gray-500' /> },
 ];
 
 export default function AllToolsPage() {
