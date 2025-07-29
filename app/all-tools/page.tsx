@@ -3,14 +3,14 @@ import { ArrowRight, ScanText, ImageIcon, FileText, Code, QrCode, FileType, Pale
 const tools = [
   { name: 'Bangla OCR', description: 'Extract text from images', href: '/tools/bangla-ocr', icon: <ScanText className='w-8 h-8 mb-4 text-blue-500' /> },
   { name: 'Image Resizer', description: 'Resize and compress images', href: '/tools/image-resizer', icon: <ImageIcon className='w-8 h-8 mb-4 text-green-500' /> },
-  { name: 'PDF Converter', description: 'Convert documents to PDF', href: '#', icon: <FileText className='w-8 h-8 mb-4 text-red-500' /> },
-  { name: 'JSON Formatter', description: 'Format and validate JSON', href: '#', icon: <Code className='w-8 h-8 mb-4 text-yellow-500' /> },
-  { name: 'QR Code Generator', description: 'Create custom QR codes', href: '#', icon: <QrCode className='w-8 h-8 mb-4 text-indigo-500' /> },
-  { name: 'Lorem Ipsum Generator', description: 'Generate placeholder text', href: '#', icon: <FileType className='w-8 h-8 mb-4 text-purple-500' /> },
-  { name: 'Color Picker', description: 'Select and convert colors', href: '#', icon: <Palette className='w-8 h-8 mb-4 text-pink-500' /> },
-  { name: 'Password Generator', description: 'Create strong passwords', href: '#', icon: <Lock className='w-8 h-8 mb-4 text-gray-500' /> },
-  { name: 'Markdown Editor', description: 'Write and preview Markdown', href: '#', icon: <Pilcrow className='w-8 h-8 mb-4 text-orange-500' /> },
-  { name: 'URL Shortener', description: 'Shorten long URLs', href: '#', icon: <Link2 className='w-8 h-8 mb-4 text-teal-500' /> },
+  { name: 'PDF Converter', description: 'Convert documents to PDF', href: '/tools/pdf-converter', icon: <FileText className='w-8 h-8 mb-4 text-red-500' /> },
+  { name: 'JSON Formatter', description: 'Format and validate JSON', href: '/tools/json-formatter', icon: <Code className='w-8 h-8 mb-4 text-yellow-500' /> },
+  { name: 'QR Code Generator', description: 'Create custom QR codes', href: '/tools/qr-code-generator', icon: <QrCode className='w-8 h-8 mb-4 text-indigo-500' /> },
+  { name: 'Lorem Ipsum Generator', description: 'Generate placeholder text', href: '/tools/lorem-ipsum-generator', icon: <FileType className='w-8 h-8 mb-4 text-purple-500' /> },
+  { name: 'Color Picker', description: 'Select and convert colors', href: '/tools/color-picker', icon: <Palette className='w-8 h-8 mb-4 text-pink-500' /> },
+  { name: 'Password Generator', description: 'Create strong passwords', href: '/tools/password-generator', icon: <Lock className='w-8 h-8 mb-4 text-gray-500' /> },
+  { name: 'Markdown Editor', description: 'Write and preview Markdown', href: '/tools/markdown-editor', icon: <Pilcrow className='w-8 h-8 mb-4 text-orange-500' /> },
+  { name: 'URL Shortener', description: 'Shorten long URLs', href: '/tools/url-shortener', icon: <Link2 className='w-8 h-8 mb-4 text-teal-500' /> },
 ];
 
 export default function AllToolsPage() {
