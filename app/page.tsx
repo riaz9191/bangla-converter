@@ -20,7 +20,7 @@ export default function HomePage() {
                 </Badge>
                 <h1 className='text-5xl lg:text-7xl font-extralight text-gray-900 leading-tight'>
                   বাংলা লেখালেখির সহজ সমাধান
-                  <span className='block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold'>
+                  <span className='py-2 block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold'>
                     নির্ভুল ফন্ট কনভার্টার
                   </span>
                 </h1>

@@ -17,9 +17,9 @@ export function Navigation() {
   }, [pathname]);
 
   const navItems = [
-    { name: "Home", href: "/" },
+    { name: "হোম", href: "/" },
     { name: "কনভার্ট করুন", href: "/convert" },
-    { name: "All Tools", href: "/all-tools" },
+    // { name: "All Tools", href: "/all-tools" },
   ];
 
   return (
