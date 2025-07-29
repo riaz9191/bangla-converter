@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -52,7 +51,7 @@ export default function PdfConverterPage() {
           <h1 className="text-5xl font-bold text-gray-800">PDF Converter</h1>
           <p className="text-lg text-gray-600 mt-2">Convert your images to PDF.</p>
         </div>
-        <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg">
           <div className="flex flex-col items-center justify-center">
             <div className="w-full p-6 border-2 border-dashed border-gray-300 rounded-lg text-center cursor-pointer hover:bg-gray-50">
               <input type="file" accept="image/png, image/jpeg" onChange={handleFileChange} className="hidden" id="file-upload" />

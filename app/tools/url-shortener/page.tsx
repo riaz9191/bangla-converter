@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -37,7 +36,7 @@ export default function UrlShortenerPage() {
           <h1 className="text-5xl font-bold text-gray-800">URL Shortener</h1>
           <p className="text-lg text-gray-600 mt-2">Shorten long URLs.</p>
         </div>
-        <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg">
           <div className="flex flex-col items-center justify-center">
             <div className="w-full mb-6">
               <input

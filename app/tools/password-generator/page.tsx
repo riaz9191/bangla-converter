@@ -1,8 +1,6 @@
-
-
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Lock, Clipboard } from 'lucide-react';
 import { BackButton } from '@/components/ui/back-button';
 
@@ -19,7 +17,7 @@ export default function PasswordGeneratorPage() {
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
 
-  const handleGenerate = () => {
+  const generatePassword = () => {
     let charSet = '';
     if (includeUppercase) charSet += uppercaseChars;
     if (includeLowercase) charSet += lowercaseChars;
@@ -33,6 +31,10 @@ export default function PasswordGeneratorPage() {
     setPassword(newPassword);
   };
 
+  useEffect(() => {
+    generatePassword();
+  }, [length, includeUppercase, includeLowercase, includeNumbers, includeSymbols]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-8">
       <div className="container mx-auto">
@@ -43,7 +45,7 @@ export default function PasswordGeneratorPage() {
           <h1 className="text-5xl font-bold text-gray-800">Password Generator</h1>
           <p className="text-lg text-gray-600 mt-2">Create strong passwords.</p>
         </div>
-        <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg">
           <div className="flex flex-col items-center justify-center">
             <div className="w-full mb-6 relative">
               <input type="text" value={password} readOnly className="w-full p-4 pr-12 border border-gray-300 rounded-lg font-mono text-lg" />
@@ -82,7 +84,7 @@ export default function PasswordGeneratorPage() {
               </div>
             </div>
             <button
-              onClick={handleGenerate}
+              onClick={generatePassword}
               className="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-md hover:bg-blue-700"
             >
               <Lock className="w-5 h-5 mr-2 inline-block" />

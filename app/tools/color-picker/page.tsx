@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -23,7 +22,7 @@ export default function ColorPickerPage() {
           <h1 className="text-5xl font-bold text-gray-800">Color Picker</h1>
           <p className="text-lg text-gray-600 mt-2">Select and convert colors.</p>
         </div>
-        <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg flex flex-col items-center">
+        <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg flex flex-col items-center">
           <Palette className="w-16 h-16 mb-4 text-pink-500" />
           <SketchPicker color={color} onChangeComplete={handleChangeComplete} />
           <div className="mt-8 w-full">

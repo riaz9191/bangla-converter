@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef } from 'react';
@@ -56,7 +55,7 @@ export default function ImageResizerPage() {
           <h1 className="text-5xl font-bold text-gray-800">Image Resizer</h1>
           <p className="text-lg text-gray-600 mt-2">Resize and compress images.</p>
         </div>
-        <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full p-6 border-2 border-dashed border-gray-300 rounded-lg text-center cursor-pointer hover:bg-gray-50">
                 <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="file-upload" />
