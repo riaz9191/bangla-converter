@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { createWorker } from 'tesseract.js';
 import { Upload, FileText, Loader, Copy } from 'lucide-react';
+import { BackButton } from '@/components/ui/back-button';
 
 export default function BanglaOcrPage() {
   const [image, setImage] = useState<string | null>(null);
@@ -37,7 +38,10 @@ export default function BanglaOcrPage() {
   return (
     <div className='min-h-screen bg-gray-50 p-8'>
       <div className='container mx-auto'>
-        <h1 className='text-4xl font-bold text-gray-800 mb-8'>Bangla OCR</h1>
+        <div className="absolute top-4 left-4">
+          <BackButton />
+        </div>
+        <h1 className='text-4xl font-bold text-gray-800 mb-8 text-center'>Bangla OCR</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
           <div className='bg-white p-6 rounded-lg shadow-md'>
             <h2 className='text-2xl font-semibold text-gray-700 mb-4'>Upload Image</h2>

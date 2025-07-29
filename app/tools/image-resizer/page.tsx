@@ -1,25 +1,28 @@
+
 'use client';
 
-import { useState } from 'react';
-import { Upload, Download, Image as ImageIcon } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { ImageIcon, Download, Upload } from 'lucide-react';
+import { BackButton } from '@/components/ui/back-button';
 
 export default function ImageResizerPage() {
-  const [image, setImage] = useState<string | null>(null);
+  const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [resizedImage, setResizedImage] = useState<string | null>(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setImage(e.target?.result as string);
+        setOriginalImage(e.target?.result as string);
         const img = new Image();
+        img.src = e.target?.result as string;
         img.onload = () => {
           setWidth(img.width);
           setHeight(img.height);
         };
-        img.src = e.target?.result as string;
       };
       reader.readAsDataURL(event.target.files[0]);
       setResizedImage(null);
@@ -27,63 +30,69 @@ export default function ImageResizerPage() {
   };
 
   const handleResize = () => {
-    if (!image) return;
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx?.drawImage(img, 0, 0, width, height);
-      setResizedImage(canvas.toDataURL());
-    };
-    img.src = image;
+    if (originalImage && canvasRef.current) {
+      const img = new Image();
+      img.src = originalImage;
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx?.drawImage(img, 0, 0, width, height);
+            setResizedImage(canvas.toDataURL('image/png'));
+        }
+      };
+    }
   };
 
   return (
-    <div className='min-h-screen bg-gray-50 p-8'>
-      <div className='container mx-auto'>
-        <h1 className='text-4xl font-bold text-gray-800 mb-8'>Image Resizer</h1>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-          <div className='bg-white p-6 rounded-lg shadow-md'>
-            <h2 className='text-2xl font-semibold text-gray-700 mb-4'>Upload Image</h2>
-            <div className='flex items-center justify-center w-full'>
-              <label htmlFor='dropzone-file' className='flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100'>
-                <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-                  <Upload className='w-10 h-10 mb-3 text-gray-400' />
-                  <p className='mb-2 text-sm text-gray-500'><span className='font-semibold'>Click to upload</span> or drag and drop</p>
-                  <p className='text-xs text-gray-500'>PNG, JPG, GIF up to 10MB</p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-8">
+      <div className="container mx-auto">
+        <div className="absolute top-4 left-4">
+          <BackButton />
+        </div>
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-gray-800">Image Resizer</h1>
+          <p className="text-lg text-gray-600 mt-2">Resize and compress images.</p>
+        </div>
+        <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="w-full p-6 border-2 border-dashed border-gray-300 rounded-lg text-center cursor-pointer hover:bg-gray-50">
+                <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="file-upload" />
+                <label htmlFor="file-upload" className="cursor-pointer">
+                    <Upload className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+                    <p className="text-gray-600">{originalImage ? 'Image Selected' : 'Click or drag to upload an image'}</p>
+                </label>
+            </div>
+            <div>
+              {originalImage && (
+                <div className="flex flex-col items-center">
+                  <img src={originalImage} alt="Original" className="max-w-full h-auto rounded-lg mb-4" />
+                  <div className="flex items-center space-x-4 mb-4">
+                    <input type="number" value={width} onChange={(e) => setWidth(parseInt(e.target.value))} className="w-24 p-2 border border-gray-300 rounded-lg" />
+                    <span>x</span>
+                    <input type="number" value={height} onChange={(e) => setHeight(parseInt(e.target.value))} className="w-24 p-2 border border-gray-300 rounded-lg" />
+                  </div>
+                  <button onClick={handleResize} className="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-md hover:bg-blue-700">
+                    <ImageIcon className="w-5 h-5 mr-2 inline-block" />
+                    Resize
+                  </button>
                 </div>
-                <input id='dropzone-file' type='file' className='hidden' onChange={handleImageUpload} />
-              </label>
+              )}
             </div>
-            {image && <img src={image} alt='Uploaded' className='mt-4 rounded-lg' />} 
           </div>
-          <div className='bg-white p-6 rounded-lg shadow-md'>
-            <h2 className='text-2xl font-semibold text-gray-700 mb-4'>Resize Options</h2>
-            <div className='flex items-center gap-4 mb-4'>
-              <div>
-                <label htmlFor='width' className='block text-sm font-medium text-gray-700'>Width</label>
-                <input type='number' id='width' value={width} onChange={(e) => setWidth(parseInt(e.target.value))} className='w-full p-2 border-2 border-gray-300 rounded-lg' />
-              </div>
-              <div>
-                <label htmlFor='height' className='block text-sm font-medium text-gray-700'>Height</label>
-                <input type='number' id='height' value={height} onChange={(e) => setHeight(parseInt(e.target.value))} className='w-full p-2 border-2 border-gray-300 rounded-lg' />
-              </div>
+          {resizedImage && (
+            <div className="mt-8 text-center">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Resized Image</h2>
+              <img src={resizedImage} alt="Resized" className="max-w-full h-auto rounded-lg mx-auto mb-4" />
+              <a href={resizedImage} download="resized-image.png" className="bg-green-600 text-white px-8 py-3 rounded-lg shadow-md hover:bg-green-700">
+                <Download className="w-5 h-5 mr-2 inline-block" />
+                Download Image
+              </a>
             </div>
-            <button onClick={handleResize} className='w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center' disabled={!image}>
-              <ImageIcon className='mr-2' /> Resize Image
-            </button>
-            {resizedImage && 
-              <div className='mt-4'>
-                <h3 className='text-xl font-semibold text-gray-700 mb-2'>Resized Image</h3>
-                <img src={resizedImage} alt='Resized' className='rounded-lg' />
-                <a href={resizedImage} download className='w-full mt-2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center'>
-                  <Download className='mr-2' /> Download Image
-                </a>
-              </div>
-            }
-          </div>
+          )}
+          <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
         </div>
       </div>
     </div>

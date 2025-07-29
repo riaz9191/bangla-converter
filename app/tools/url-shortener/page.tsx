@@ -1,7 +1,9 @@
+
 'use client';
 
 import { useState } from 'react';
-import { Link2 } from 'lucide-react';
+import { Link2, Clipboard } from 'lucide-react';
+import { BackButton } from '@/components/ui/back-button';
 
 export default function UrlShortenerPage() {
   const [longUrl, setLongUrl] = useState('');
@@ -10,7 +12,7 @@ export default function UrlShortenerPage() {
 
   const handleShorten = async () => {
     try {
-      const response = await fetch(`https://tinyurl.com/api-create.php?url=${longUrl}`);
+      const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
       if (response.ok) {
         const data = await response.text();
         setShortUrl(data);
@@ -28,6 +30,9 @@ export default function UrlShortenerPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-8">
       <div className="container mx-auto">
+        <div className="absolute top-4 left-4">
+          <BackButton />
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-800">URL Shortener</h1>
           <p className="text-lg text-gray-600 mt-2">Shorten long URLs.</p>
@@ -56,7 +61,9 @@ export default function UrlShortenerPage() {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Shortened URL</h2>
                 <div className="flex items-center justify-between p-4 bg-gray-100 border border-gray-300 rounded-lg">
                   <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="text-lg font-mono text-blue-600 hover:underline">{shortUrl}</a>
-                  <button onClick={() => navigator.clipboard.writeText(shortUrl)} className="text-blue-600 hover:text-blue-800">Copy</button>
+                  <button onClick={() => navigator.clipboard.writeText(shortUrl)} className="text-blue-600 hover:text-blue-800">
+                    <Clipboard className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
             )}

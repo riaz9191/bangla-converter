@@ -1,13 +1,16 @@
+
 'use client';
 
 import { useState } from 'react';
-import { FileType } from 'lucide-react';
+import { FileType, Clipboard } from 'lucide-react';
+import { BackButton } from '@/components/ui/back-button';
 
 const loremIpsumText = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Praesent tristique magna sit amet purus gravida quis. Montes nascetur ridiculus mus mauris vitae ultricies. 
+Commodo ullamcorper a lacus vestibulum sed arcu non odio. Augue neque gravida in fermentum et sollicitudin ac. 
+Felis donec et odio pellentesque diam volutpat commodo sed egestas. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.
 `;
 
 export default function LoremIpsumGeneratorPage() {
@@ -25,6 +28,9 @@ export default function LoremIpsumGeneratorPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-8">
       <div className="container mx-auto">
+        <div className="absolute top-4 left-4">
+          <BackButton />
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-800">Lorem Ipsum Generator</h1>
           <p className="text-lg text-gray-600 mt-2">Generate placeholder text.</p>
@@ -50,13 +56,16 @@ export default function LoremIpsumGeneratorPage() {
               Generate Text
             </button>
             {generatedText && (
-              <div className="mt-8 w-full">
+              <div className="mt-8 w-full relative">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Generated Text</h2>
                 <textarea
                   readOnly
                   value={generatedText}
                   className="w-full h-64 p-4 bg-gray-100 border border-gray-300 rounded-lg"
                 />
+                <button onClick={() => navigator.clipboard.writeText(generatedText)} className="absolute top-12 right-4 text-gray-500 hover:text-gray-700">
+                    <Clipboard className="w-5 h-5" />
+                </button>
               </div>
             )}
           </div>
