@@ -28,7 +28,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <CartProvider>
             <Navigation />
-            <main className="min-h-screen">{children}</main>
+            <main className="">{children}</main>
             {/* <Footer /> */}
             {/* <FloatingAIButton /> */}
             {/* <Toaster /> */}

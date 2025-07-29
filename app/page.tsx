@@ -6,9 +6,9 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <div className='min-h-screen bg-gradient-to-b from-blue-50 to-white'>
+    <div className='fixed inset-0 flex justify-center items-center bg-gradient-to-b from-blue-50 to-white'>
       {/* Hero Section */}
-      <section className='relative flex items-center justify-center h-screen overflow-hidden'>
+      <section className='relative'>
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] opacity-5"></div>
         <div className='container mx-auto px-4 relative z-10'>
           <div className='grid lg:grid-cols-2 gap-16 items-center'>
